@@ -21,7 +21,7 @@
   <param name="update_min_a" value="0.001757"/>
   <param name="update_min_d" value="0.0002"/>
   <param name="transform_tolerance" value="0.5"/>
-  <param name="update_frequency" value="5.0"/>
+  <param name="update_frequency" value="10.0"/>
   
   <!--laser setting-->
   <param name="laser_min_range" value="-0.5"/>
@@ -35,8 +35,8 @@
 
 
   <!-- Initial Pose-->
-  <param name="initial_pose_x" value="-3.15"/>
-  <param name="initial_pose_y" value="-1.127"/>
+  <param name="initial_pose_x" value="-1.75"/>
+  <param name="initial_pose_y" value="-1.25"/>
   <param name="initial_pose_a" value="0.026"/>
  </node>
 

@@ -22,6 +22,6 @@ TrajectoryPlannerROS:
   gdist_scale: 0.85 #1.6 #0.8
   occdist_scale: 0.5
 
-  holonomic_robot: false
+#  holonomic_robot: false
 
-  meter_scoring: true
+#  meter_scoring: true

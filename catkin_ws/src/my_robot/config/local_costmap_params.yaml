@@ -1,10 +1,10 @@
 local_costmap:
-   global_frame: odom #map # odom //for now changed as getting extaploation error even with very low frequency 
+   global_frame: map # odom //for now changed as getting extaploation error even with very low frequency 
    robot_base_frame: robot_footprint
    update_frequency: 5.0
    publish_frequency: 5.0
-   width: 5.0
-   height: 5.0
+   width: 4.0
+   height: 4.0
    resolution: 0.01
    static_map: false
    rolling_window: true
