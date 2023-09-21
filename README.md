@@ -1,5 +1,5 @@
 # Udacity Robotics Nanodegree
-**Introduction** : This projct "Home Service Robot" is developed and simulated as fully autonomous robot, which when recieves pick up zone and drop off zone's (x,y) coordinate via command line,
+**Introduction** :  "Home Service Robot" is developed and simulated as fully autonomous robot, which when recieves pick up zone and drop off zone's (x,y) coordinate via command line,
 starts localizing and navigating itself on a given map using Adaptive Montecarlo localization(one of Probalistic localization approach) and navigating to goal by planning a global plan based on Grid-based Dijkstra's algorithm and avoiding obstacle and course correction by local planner which used Dynamic Window Approach (DWA).
 
 **Prerequisite**
@@ -65,16 +65,34 @@ starts localizing and navigating itself on a given map using Adaptive Montecarlo
   **Launch Instructions**
 
   `~catkin_ws $ ./src/scripts/home_service_turtlebot.sh`
+  
   `~catkin_ws $ ./src/scripts/home_service.sh`
 
-** Videos **
+**Videos**
 
 [pick object](https://www.youtube.com/watch?v=PjNk3vHYKDY)
+
 [home service robot turtlebot](https://www.youtube.com/watch?v=pYREEd_RO1M)
 
+**Project**
 
-  **Notes**
-  This project has two set of robots in same environment. First set is having custom robot used throughtout this nanodegree (my_robot) and second one is turtlebot kobuki.
+Lets dive in to details.
+
+- Using Gazebo, Design your simulation environment. Special care should be taken to ensure enough distinct features in your world, as they will be helpful during mapping and localization.
+- use Gazebo or urdf or any other tools(which support robot design and can be exproted as xml,urdf or sdf format) to design your robot , its moving and static linkage along with sensors(RGBD Camera & LIDAR sensor) and actuators(differential wheel controller for odometry).
+- start creating your package in catkin environment with turtlebot teleop ros pacakage or Rviz to start testing you robots behavior and fine tune its properties for sensors and actuators.
+- Once satisfied with results, use SLAM_Gmapping package(laser based SLAM) or RTAB map(real time appearance based mapping technique) to create MAP to be used further in naviagtion stack. I used both of them, but for final project kept map created by Laser based SLAM, as map created by RTAB map was driving robot's erratic behavior, seems like my environment has to do much with it.
+- In next phase, Start with Localization. This project uses odometry and Laser scans with one of the probablistic localization approach, Adaptive montecarlo Localization to localize robot in world. There are great length of parameters , which needs to be tuned for better result of AMCL, but also ROS wiki details for AMCL is great, so must refer it.
+- Now, you are ready to test you Navigation stack to see how your robot automatically plan path, both Global and Local to reach goal,either sent by teleop package or Rviz or any custom package written by you. This phase also deals with various concepts like, cost map, local planner, global planner , recovery methods etc. Again great resources are present in ROS wiki for move_base package.
+- This phase in project to write your own package, which will send goals to your robot one by one. Here I used actionlib_msgs to request move_base or in General Robot to go to a pick up zone or drop off zone, we do get response as well, if action was performed successfully or not.
+- The last piece of this project was to create a node, which will ask Rviz to display a marker at pick up zone , when Robot is enroute to Pickup zone or when reached to drop off zone.
+- Please watch home service robot turtlebot video at above mentioned link.
+
+**Notes**
+
+ This project has two set of robots in same environment. First set is having custom robot used throughtout this nanodegree (my_robot) and second one is turtlebot kobuki.
+ To use turtlebot with custom package from my_robot package, Please download zipped folder as we need to make some changes in turtlebot packages(checked in as submodule, please excuse my little knowledge with git).
+planning to improve this package in future to explore more on ROS. 
   
 
   
