@@ -1,6 +1,6 @@
 <launch>
    <!-- Robot pose -->
-  <arg name="x" default="1.15"/>
+  <arg name="x" default="2.15"/>
   <arg name="y" default="-3.15"/>
   <arg name="z" default="0"/>
   <arg name="roll" default="0"/>
@@ -30,5 +30,5 @@
               
  <!--launch rviz-->
 
- <node name="rviz" pkg="rviz" type="rviz" respawn="false"/>          
+ <!--node name="rviz" pkg="rviz" type="rviz" respawn="false"/-->          
 </launch>
