@@ -10,12 +10,12 @@ Package and Launch file to be considered:
 - mapping.launch # launching RTAB-map based mapping
 - amcl.launch # launching amcl
 
-**Shell scrpits**
+**Shell scrpits to be used for Project Evaluation**
 ~catkin_ws:
 - `./src/scripts/test_slam.sh`
 - `./src/scripts/test_navigation.sh`
-- `./src/scripts/pick_objects.sh`
-- `./src/scripts/add_marker.sh`
+- `./src/scripts/pick_objects.sh` (ex: (x,y): Pick Up Zone: 8.0 3.5 / Drop Off zone: 1.0 0.0)
+- `./src/scripts/add_marker.sh` 
 - `./src/scripts/home_service.sh`
 
 **Prerequisite**
@@ -26,9 +26,10 @@ Package and Launch file to be considered:
 **ROS Package used**
 - [SLAM Gmapping](https://github.com/ros-perception/slam_gmapping) : This package contains Grid based fast SLAM alogoritm for mapping, Robot's pose is estimated using particle filter, while map is created as Grided occupancy map. This package needs Laser scans and Odometry of robot to create a 2D occupancy map, which should be created and used with help of map_server node in navigation tasks. map_server node generates two file map meta data and map as image.`Test_slam.sh` should be used for mapping & use `rosrun map_server map_saver -f mymap` to create map and it's metadata file.
   
-- [AMCL](http://wiki.ros.org/amcl?distro=noetic) : AMCL package is used for localizing robot in world using particle filters, which is a very powerful probablistic localization approach. It's beauty lies in its adaptive nature of particle size and resampling method.It is relatively light weight on memory and gives contol on sample size selection.There are various other techniques available for localization, few of them are EKF, Bayes filter based Markov decision ,Histogram filters etc. Once the map is available this package can be used to fairly estimate robot's pose in world. To test amcl, use `Test_navigation.sh`.
+- [AMCL](http://wiki.ros.org/amcl?distro=noetic) : AMCL package is used for localizing robot in world using particle filters, which is a very powerful probablistic localization approach. It's beauty lies in its adaptive nature of particle size and resampling method.It is relatively light weight on memory and gives contol on sample size selection. AMCL needs laser scan and robot's odometry to update particle weight and refines the robot's pose and send pose infomation to move_base for robot's maneuver in static or dynamic environment to avoid obstacle.Once the map is available this package can be used to fairly estimate robot's pose in world. To test amcl, use `Test_navigation.sh`.
+There are various other techniques available for localization, few of them are EKF, Bayes filter based Markov decision ,Histogram filters etc. 
   
-- [move_base](http://wiki.ros.org/move_base?distro=noetic) : This package is heart of this project, as it enables planning a global path and executing local short terms goals by using costmap, which again is a gridded occupancy map.It also enable corrective behaviors like rotation, back up and navigating around obstacle as well as sampling path and selecting best scoring path for navigation. Its provide actuation to robot's base based on odometery, laser scan, Tf informtaions and obviously map.
+- [move_base](http://wiki.ros.org/move_base?distro=noetic) : This package is heart of this project, as it enables planning a global path and executing local short terms goals by using costmap, which again is a gridded occupancy map.It also enable corrective behaviors like rotation, back up and navigating around obstacle as well as sampling path and selecting best scoring path for navigation. Its provide actuation to robot's base based on odometery, laser scan, Tf informtaions and obviously map. For Global path planning , we are using navfn and for local planning, in general `base_local_planner` or `dwa_local_planner` can be used. For thios project , we used Dynamic windowing approach "dwa_local_planner", which is better in general.
   
 - [turtlebot_teleop](https://github.com/turtlebot/turtlebot) : This package is used to sending goal command to robot either via keyboard or via controller. `test_navigation.sh` use this package.
   
@@ -89,7 +90,7 @@ Package and Launch file to be considered:
 
 **Launch Instructions**
 
-  `~catkin_ws $ ./src/scripts/home_service.sh`
+  `~catkin_ws $ ./src/scripts/home_service.sh` (Should be used for Project evaluation)
 
   `~catkin_ws $ ./src/scripts/home_service_turtlebot.sh`
   
@@ -97,6 +98,8 @@ Package and Launch file to be considered:
 **Videos**
 
 [pick object](https://www.youtube.com/watch?v=PjNk3vHYKDY)
+
+[home_service robot my_robot](https://www.youtube.com/watch?v=kR3tQOS2jDM)
 
 [home service robot turtlebot](https://www.youtube.com/watch?v=pYREEd_RO1M)
 
